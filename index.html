@@ -1,8 +1,167 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>cypherposium</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>the cypherposium</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Space+Mono:wght@400;700&family=Playfair+Display:ital@1&display=swap');
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; }
+
+    body {
+      background-color: #0d1f1a;
+      color: #ffffff;
+      font-family: 'Space Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .orb {
+      position: fixed;
+      bottom: -18vw;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48vw;
+      height: 48vw;
+      max-width: 520px;
+      max-height: 520px;
+      background: radial-gradient(circle at 40% 40%, #c96b40, #8c3d20);
+      border-radius: 50%;
+      opacity: 0.72;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .line {
+      position: fixed;
+      background: rgba(255,255,255,0.12);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .line-1 { width: 1px; height: 60vh; top: -5vh; left: 30%; transform: rotate(22deg); transform-origin: top center; }
+    .line-2 { width: 1px; height: 50vh; bottom: 10vh; right: 28%; transform: rotate(-18deg); transform-origin: bottom center; }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-wrap {
+      width: 260px;
+      height: 260px;
+      position: relative;
+      margin-bottom: 2.4rem;
+    }
+
+    .ring {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .ring-outer { animation: spin-cw 28s linear infinite; }
+    .ring-inner { animation: spin-ccw 22s linear infinite; }
+
+    @keyframes spin-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+
+    .ring text { font-family: 'Fredoka One', sans-serif; font-size: 15.5px; letter-spacing: 0.5px; }
+    .ring-outer text { fill: #e8452a; }
+    .ring-inner text { fill: #4ab8c4; }
+
+    .tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.02em;
+      margin-bottom: 0.35rem;
+      text-align: center;
+    }
+
+    .sub-tagline {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.15em;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .cta-row { display: flex; gap: 2rem; align-items: center; }
+
+    .cta {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(0.65rem, 1.4vw, 0.78rem);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 0.75em 1.6em;
+      background: rgba(255,255,255,0.04);
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .cta:hover {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.6);
+      color: #ffffff;
+    }
+
+    @media (max-width: 500px) {
+      .logo-wrap { width: 210px; height: 210px; }
+      .cta-row { flex-direction: column; gap: 1rem; }
+      .orb { width: 90vw; height: 90vw; bottom: -30vw; }
+    }
+  </style>
 </head>
 <body>
-welcome to cypherposium placeholder page.
+
+  <div class="orb"></div>
+  <div class="line line-1"></div>
+  <div class="line line-2"></div>
+
+  <main class="content">
+
+    <div class="logo-wrap" aria-label="the cypherposium">
+      <svg class="ring ring-outer" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="outer-circle" d="M 130,130 m -100,0 a 100,100 0 1,1 200,0 a 100,100 0 1,1 -200,0"/>
+        </defs>
+        <text><textPath href="#outer-circle" startOffset="0%">the cypherposium   </textPath></text>
+      </svg>
+      <svg class="ring ring-inner" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="inner-circle" d="M 130,130 m -68,0 a 68,68 0 1,1 136,0 a 68,68 0 1,1 -136,0"/>
+        </defs>
+        <text><textPath href="#inner-circle" startOffset="0%">THE CYPHER     </textPath></text>
+      </svg>
+    </div>
+
+    <p class="tagline">what is rap?</p>
+    <p class="sub-tagline">we have no idea.</p>
+
+    <div class="cta-row">
+      <a class="cta" href="https://lu.ma/rapmit" target="_blank" rel="noopener">salon/cypher</a>
+      <a class="cta" href="https://lu.ma/raphackathon" target="_blank" rel="noopener">rap/hack</a>
+    </div>
+
+  </main>
+
 </body>
 </html>
