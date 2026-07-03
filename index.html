@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>the cypherposium</title>
-  <meta name="description" content="The Cypherposium — a salon/cypher on 7.17 and a rap hackathon 7.18–7.19.">
+  <meta name="description" content="The Cypherposium — an interdisciplinary rap conference at MIT. Salon/cypher 7.17, rap hackathon 7.18–7.19.">
   <meta property="og:title" content="the cypherposium">
-  <meta property="og:description" content="The salon/cypher · 7.17 — Rap hackathon · 7.18–7.19">
+  <meta property="og:description" content="An interdisciplinary rap conference at MIT — salon/cypher 7.17, rap hackathon 7.18–7.19">
   <meta name="theme-color" content="#000000">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23f05a1e'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Young+Serif&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Space+Mono:wght@400;700&family=Young+Serif&display=swap" rel="stylesheet">
   <style>
     :root {
       --orange: #f05a1e;
@@ -60,10 +60,21 @@
     @keyframes spin-cw { to { transform: rotate(360deg); } }
 
     .ring text {
-      font-family: 'Fredoka', sans-serif;
-      font-weight: 600;
+      font-family: 'Young Serif', serif;
+      font-weight: 400;
       font-size: 40px;
       fill: var(--orange);
+    }
+
+    .blurb {
+      font-family: 'Times New Roman', Times, serif;
+      font-weight: 400;
+      font-size: clamp(1.2rem, 2.9vw, 1.6rem);
+      letter-spacing: 0.05em;
+      transform: rotate(-2.5deg);
+      color: rgba(255, 255, 255, 0.72);
+      text-align: center;
+      margin-top: calc(-1 * clamp(0.5rem, 2vh, 1.25rem));
     }
 
     /* ---- CRT screen ---- */
@@ -284,10 +295,10 @@
     }
 
     .date-chip {
-      font-family: 'Young Serif', serif;
-      font-weight: 400;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
       font-size: clamp(0.85rem, 2vw, 1.05rem);
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       color: var(--chip-text);
       background: var(--chip-bg);
       padding: 0.2em 0.55em;
@@ -319,6 +330,10 @@
       .screen img { height: clamp(240px, 40vh, 300px); }
     }
 
+    /* feature flag: powerCycle off — screen stays on, no transition effects */
+    html.no-power-cycle .picture { animation: none; }
+    html.no-power-cycle .static-flash { display: none; }
+
     @media (prefers-reduced-motion: reduce) {
       .ring { animation: none; }
       .picture { animation: none; }
@@ -345,6 +360,8 @@
     </svg>
   </div>
 
+  <p class="blurb">An Interdisciplinary Rap Conference</p>
+
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <filter id="crt-warp" x="-10%" y="-10%" width="120%" height="120%">
       <feTurbulence type="fractalNoise" baseFrequency="0.012 0.18" numOctaves="2" seed="7" result="noise"/>
@@ -353,7 +370,7 @@
                  values="0; 0; 9; 2; 13; 4; 0; 0"
                  keyTimes="0; 0.52; 0.58; 0.62; 0.66; 0.72; 0.78; 1"
                  dur="7s" repeatCount="indefinite"/>
-        <animate attributeName="scale" additive="sum"
+        <animate id="warp-power-kick" attributeName="scale" additive="sum"
                  values="18; 3; 0; 0; 10; 24; 24"
                  keyTimes="0; 0.03; 0.05; 0.92; 0.94; 0.965; 1"
                  dur="20s" repeatCount="indefinite"/>
@@ -379,6 +396,24 @@
       <span class="event-name">RAP HACKATHON</span>
     </a>
   </nav>
+
+  <script>
+    // Feature flags — edit defaults here, or override per-visit via URL,
+    // e.g. index.html?power=off
+    const FLAGS = {
+      powerCycle: true,   // CRT turn-on/turn-off cycle
+    };
+
+    const power = new URLSearchParams(location.search).get('power');
+    if (power !== null) {
+      FLAGS.powerCycle = !['off', '0', 'false'].includes(power.toLowerCase());
+    }
+
+    if (!FLAGS.powerCycle) {
+      document.documentElement.classList.add('no-power-cycle');
+      document.getElementById('warp-power-kick')?.remove();
+    }
+  </script>
 
 </body>
 </html>
