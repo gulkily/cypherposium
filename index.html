@@ -3,417 +3,114 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>the cypherposium</title>
-  <meta name="description" content="The Cypherposium — an interdisciplinary rap conference at MIT. Salon/cypher 7.17, rap hackathon 7.18–7.19.">
-  <meta property="og:title" content="the cypherposium">
-  <meta property="og:description" content="An interdisciplinary rap conference at MIT — salon/cypher 7.17, rap hackathon 7.18–7.19">
-  <meta name="theme-color" content="#000000">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23f05a1e'/%3E%3C/svg%3E">
+  <title>what is rap? — the cypherposium</title>
+  <meta name="description" content="The Cypherposium — an interdisciplinary rap conference at the MIT Media Lab. Salon/cypher 7.17, rap hackathon 7.18–7.19.">
+  <meta property="og:title" content="what is rap? — the cypherposium">
+  <meta property="og:description" content="An interdisciplinary rap conference at the MIT Media Lab — salon/cypher 7.17, rap hackathon 7.18–7.19">
+  <meta name="theme-color" content="#dfddd6">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23dfddd6'/%3E%3Ccircle cx='8' cy='8' r='4.5' fill='%231b1a19'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Young+Serif&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --orange: #f05a1e;
-      --blue: #2f74e8;
-      --chip-bg: #6fc9ee;
-      --chip-text: #00121f;
+      --bg: #dfddd6;
+      --ink: #1b1a19;
+      --box: #c3c3c0;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background-color: #000000;
-      color: #ffffff;
-      font-family: 'Space Mono', monospace;
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
       min-height: 100svh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: clamp(1.5rem, 4.5vh, 2.75rem);
-      padding: clamp(1.5rem, 4vh, 3rem) 1.25rem;
+      gap: clamp(2rem, 6vh, 3.5rem);
+      padding: clamp(2rem, 6vh, 4rem) 1.25rem;
       overflow-x: hidden;
     }
 
-    .visually-hidden {
-      position: absolute;
-      width: 1px; height: 1px;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-      white-space: nowrap;
-    }
-
-    /* ---- circular wordmark ---- */
-
-    .logo-wrap {
-      width: clamp(140px, 20vh, 200px);
-      aspect-ratio: 1;
-    }
-
-    .ring {
-      width: 100%;
-      height: 100%;
-      animation: spin-cw 36s linear infinite;
-    }
-
-    @keyframes spin-cw { to { transform: rotate(360deg); } }
-
-    .ring text {
-      font-family: 'Fredoka', sans-serif;
-      font-weight: 600;
-      font-size: 40px;
-      fill: var(--orange);
-    }
-
-    .blurb {
-      font-family: 'Young Serif', serif;
-      font-weight: 400;
-      font-size: clamp(1.2rem, 2.9vw, 1.6rem);
-      letter-spacing: 0.05em;
-      transform: rotate(-2.5deg);
-      color: rgba(255, 255, 255, 0.72);
-      text-align: center;
-      margin-top: calc(-1 * clamp(0.5rem, 2vh, 1.25rem));
-    }
-
-    /* ---- CRT screen ---- */
-
-    .screen {
-      position: relative;
-      background: #060607;
-      border-radius: clamp(18px, 4vw, 32px) / clamp(21px, 4.5vw, 38px);
-      overflow: hidden;
-    }
-
-    /* curved-glass glare + corner shading — stays even when the tube is off */
-    .screen::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      pointer-events: none;
-      border-radius: inherit;
-      background:
-        radial-gradient(ellipse 130% 55% at 50% -15%, rgba(255,255,255,0.13), transparent 55%),
-        radial-gradient(ellipse at center, transparent 56%, rgba(0,0,0,0.26));
-    }
-
-    /* the raster: white picture layer that powers on/off */
-    .picture {
-      position: relative;
-      background: #ffffff;
-      padding: clamp(14px, 2.5vh, 26px) clamp(30px, 5vw, 56px);
-      animation: crt-power 20s linear infinite;
-    }
-
-    @keyframes crt-power {
-      /* turn-on: line flares, stutters, overshoots, settles */
-      0%     { transform: scaleY(0.006) scaleX(0.6);   filter: brightness(2.8); }
-      0.8%   { transform: scaleY(0.006) scaleX(1);     filter: brightness(3); }
-      1.4%   { transform: scaleY(0.06);                filter: brightness(2.2); }
-      1.8%   { transform: scaleY(0.015);               filter: brightness(3); }
-      2.6%   { transform: scaleY(1.07);                filter: brightness(1.9); }
-      3.1%   { transform: scaleY(0.96);                filter: brightness(1.4) contrast(1.3); }
-      3.7%   { transform: scaleY(1.02);                filter: brightness(1.15); }
-      4.4%   { transform: scale(1);                    filter: brightness(1); }
-      /* steady */
-      92%    { transform: scale(1);                    filter: brightness(1); }
-      /* turn-off: hiccup, bloom, collapse to line, then dot */
-      92.6%  { transform: scaleY(1.05);                filter: brightness(1.6); }
-      93.1%  { transform: scaleY(0.85) translateX(3px); filter: brightness(1.3) contrast(1.4); }
-      93.5%  { transform: scaleY(1.03);                filter: brightness(1.9); }
-      94.2%  { transform: scaleY(0.3);                 filter: brightness(2.2); }
-      95%    { transform: scaleY(0.006);               filter: brightness(2.8); }
-      96%    { transform: scaleY(0.006) scaleX(0.08);  filter: brightness(3); }
-      96.6%  { transform: scaleY(0.006) scaleX(0.001); filter: brightness(3); opacity: 1; }
-      97.2%, 100% { transform: scaleY(0.006) scaleX(0.001); filter: brightness(0); opacity: 0; }
-    }
-
-    .screen img {
+    .title {
       display: block;
-      height: clamp(240px, 40vh, 420px);
-      width: auto;
-      filter: url(#crt-warp)
-              drop-shadow(1.5px 0 rgba(255, 0, 60, 0.22))
-              drop-shadow(-1.5px 0 rgba(0, 170, 255, 0.22));
-      animation: crt-flicker 3.2s steps(1, end) infinite,
-                 crt-squeeze 7s ease-in-out infinite;
+      width: min(56vw, 420px);
+      min-width: 250px;
+      height: auto;
     }
 
-    /* geometry wobble + horizontal tracking jitter, synced to the displacement burst */
-    @keyframes crt-squeeze {
-      0%, 52%, 78%, 100% { transform: scale(1, 1); }
-      18%   { transform: translateX(0); }
-      18.6% { transform: translateX(3px); }
-      19.2% { transform: translateX(0); }
-      37%   { transform: translateX(0); }
-      37.6% { transform: translateX(-2.5px); }
-      38.2% { transform: translateX(0); }
-      58% { transform: scale(1.02, 0.985) skewX(0.4deg) translateX(-3px); }
-      64% { transform: scale(0.985, 1.015) skewX(-0.5deg) translateX(3px); }
-      70% { transform: scale(1.012, 0.99); }
+    .polaroid {
+      display: block;
+      width: min(58vw, 435px);
+      min-width: 270px;
+      height: auto;
     }
-
-    /* TV-static snow: noise tile jumping position every frame, with interference bursts */
-    .static {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-      background: url('assets/noise.png');
-      background-size: 112px 112px;
-      opacity: 0.14;
-      animation: static-shift 0.44s steps(1, end) infinite,
-                 static-burst 7s linear infinite;
-    }
-
-    @keyframes static-shift {
-      0%    { background-position: 0 0; }
-      12.5% { background-position: -47px 33px; }
-      25%   { background-position: 25px -61px; }
-      37.5% { background-position: -84px -20px; }
-      50%   { background-position: 66px 51px; }
-      62.5% { background-position: -15px 78px; }
-      75%   { background-position: 90px -34px; }
-      87.5% { background-position: -58px -72px; }
-      100%  { background-position: 0 0; }
-    }
-
-    @keyframes static-burst {
-      0%, 50%, 80%, 100% { opacity: 0.14; }
-      56% { opacity: 0.34; }
-      62% { opacity: 0.2; }
-      68% { opacity: 0.38; }
-      74% { opacity: 0.18; }
-    }
-
-    /* heavy snow that flares only around power on/off (20s clock) */
-    .static-flash {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-      background: url('assets/noise.png');
-      background-size: 84px 84px;
-      opacity: 0;
-      animation: flash-shift 0.22s steps(1, end) infinite,
-                 flash-power 20s linear infinite;
-    }
-
-    @keyframes flash-shift {
-      0%   { background-position: 0 0; }
-      20%  { background-position: 41px -29px; }
-      40%  { background-position: -63px 17px; }
-      60%  { background-position: 22px 55px; }
-      80%  { background-position: -38px -49px; }
-      100% { background-position: 0 0; }
-    }
-
-    @keyframes flash-power {
-      0%    { opacity: 0.8; }
-      1.2%  { opacity: 0.55; }
-      2%    { opacity: 0.7; }
-      3%    { opacity: 0.45; }
-      4.5%  { opacity: 0.15; }
-      6%    { opacity: 0; }
-      91.5% { opacity: 0; }
-      92.5% { opacity: 0.35; }
-      94%   { opacity: 0.6; }
-      95.5% { opacity: 0.8; }
-      100%  { opacity: 0.9; }
-    }
-
-    /* scanlines — part of the raster, so they collapse with it */
-    .picture::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-      background:
-        repeating-linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0.10) 0px,
-          rgba(0, 0, 0, 0.10) 1px,
-          transparent 1px,
-          transparent 3px
-        );
-    }
-
-    /* rolling scan band */
-    .picture::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: -35%;
-      height: 30%;
-      z-index: 3;
-      pointer-events: none;
-      background: linear-gradient(
-        to bottom,
-        transparent,
-        rgba(0, 0, 0, 0.05) 45%,
-        rgba(0, 0, 0, 0.09) 50%,
-        rgba(0, 0, 0, 0.05) 55%,
-        transparent
-      );
-      animation: crt-scan 6s linear infinite;
-    }
-
-    @keyframes crt-scan {
-      to { transform: translateY(450%); }
-    }
-
-    @keyframes crt-flicker {
-      0%, 100% { opacity: 1; }
-      7%  { opacity: 0.92; }
-      9%  { opacity: 1; }
-      36% { opacity: 0.96; }
-      38% { opacity: 1; }
-      61% { opacity: 0.9; }
-      62% { opacity: 1; }
-      84% { opacity: 0.95; }
-      86% { opacity: 1; }
-    }
-
-    /* ---- events ---- */
 
     .events {
       display: flex;
-      gap: clamp(2.5rem, 8vw, 5.5rem);
+      gap: clamp(2rem, 10vw, 5rem);
       align-items: flex-start;
+      margin-top: clamp(0.5rem, 2.5vh, 1.5rem);
     }
 
     .event {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.1rem;
+      gap: 0.35em;
       text-decoration: none;
+      color: var(--ink);
     }
 
-    .date-chip {
-      font-family: 'Young Serif', serif;
-      font-weight: 400;
-      font-size: clamp(0.85rem, 2vw, 1.05rem);
-      letter-spacing: 0.06em;
-      color: var(--chip-text);
-      background: var(--chip-bg);
-      padding: 0.2em 0.55em;
-      transition: background 0.2s ease;
+    .date {
+      font-family: 'Anonymous Pro', monospace;
+      font-weight: 700;
+      font-size: clamp(0.85rem, 2.1vw, 1rem);
     }
 
     .event-name {
-      font-family: 'Young Serif', serif;
+      font-style: italic;
       font-weight: 400;
-      font-size: clamp(0.8rem, 1.9vw, 1rem);
-      letter-spacing: 0.07em;
-      color: var(--blue);
+      font-size: clamp(1rem, 2.6vw, 1.25rem);
+      background: var(--box);
+      padding: 0.22em 0.85em;
       white-space: nowrap;
-      transition: color 0.2s ease;
+      transition: background 0.2s ease;
     }
-
-    .event:hover .date-chip,
-    .event:focus-visible .date-chip { background: #9adcf7; }
 
     .event:hover .event-name,
     .event:focus-visible .event-name {
-      color: #5f97f2;
+      background: #b2b2ae;
       text-decoration: underline;
-      text-underline-offset: 0.3em;
+      text-underline-offset: 0.25em;
     }
 
-    @media (max-width: 420px) {
-      .events { gap: 2rem; }
-      .screen img { height: clamp(240px, 40vh, 300px); }
-    }
-
-    /* feature flag: powerCycle off — screen stays on, no transition effects */
-    html.no-power-cycle .picture { animation: none; }
-    html.no-power-cycle .static-flash { display: none; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .ring { animation: none; }
-      .picture { animation: none; }
-      .screen img {
-        animation: none;
-        filter: drop-shadow(1.5px 0 rgba(255, 0, 60, 0.22))
-                drop-shadow(-1.5px 0 rgba(0, 170, 255, 0.22));
-      }
-      .picture::after { display: none; }
-      .static, .static-flash { display: none; }
+    @media (max-width: 400px) {
+      .events { gap: 1.25rem; }
+      .event-name { font-size: 0.95rem; }
     }
   </style>
 </head>
 <body>
 
-  <h1 class="visually-hidden">the cypherposium</h1>
+  <h1><img class="title" src="assets/title-what-is-rap.png" alt="what is rap?" width="1384" height="322"></h1>
 
-  <div class="logo-wrap" role="img" aria-label="the cypherposium">
-    <svg class="ring" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <path id="ring-circle" d="M 150,150 m 0,-95 a 95,95 0 1,1 -0.01,0 z"/>
-      </defs>
-      <text><textPath href="#ring-circle" textLength="597" lengthAdjust="spacingAndGlyphs">THE&#160;CYPHERPOSIUM&#160;</textPath></text>
-    </svg>
-  </div>
-
-  <p class="blurb">An Interdisciplinary Rap Conference</p>
-
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <filter id="crt-warp" x="-10%" y="-10%" width="120%" height="120%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.18" numOctaves="2" seed="7" result="noise"/>
-      <feDisplacementMap in="SourceGraphic" in2="noise" xChannelSelector="R" yChannelSelector="G" scale="0">
-        <animate attributeName="scale"
-                 values="0; 0; 9; 2; 13; 4; 0; 0"
-                 keyTimes="0; 0.52; 0.58; 0.62; 0.66; 0.72; 0.78; 1"
-                 dur="7s" repeatCount="indefinite"/>
-        <animate id="warp-power-kick" attributeName="scale" additive="sum"
-                 values="18; 3; 0; 0; 10; 24; 24"
-                 keyTimes="0; 0.03; 0.05; 0.92; 0.94; 0.965; 1"
-                 dur="20s" repeatCount="indefinite"/>
-      </feDisplacementMap>
-    </filter>
-  </svg>
-
-  <div class="screen">
-    <div class="picture">
-      <img src="assets/voxel.png" alt="Isometric voxel illustration in orange, black and white">
-      <div class="static" aria-hidden="true"></div>
-      <div class="static-flash" aria-hidden="true"></div>
-    </div>
-  </div>
+  <img class="polaroid" src="assets/polaroid.png" width="435" height="490"
+       alt="Polaroid photo captioned &ldquo;mit rap club&rdquo;: a figure sitting inside a cube outlined in chalk-like text">
 
   <nav class="events" aria-label="Events">
-    <a class="event" href="https://lu.ma/rapmit" target="_blank" rel="noopener">
-      <span class="date-chip">7.17</span>
-      <span class="event-name">THE SALON/CYPHER</span>
-    </a>
     <a class="event" href="https://lu.ma/raphackathon" target="_blank" rel="noopener">
-      <span class="date-chip">7.18&ndash;7.19</span>
-      <span class="event-name">RAP HACKATHON</span>
+      <span class="date">7.18-7.19</span>
+      <span class="event-name">HACKATHON</span>
+    </a>
+    <a class="event" href="https://lu.ma/rapmit" target="_blank" rel="noopener">
+      <span class="date">7.17</span>
+      <span class="event-name">SALON/CYPHER</span>
     </a>
   </nav>
-
-  <script>
-    // Feature flags — edit defaults here, or override per-visit via URL,
-    // e.g. index.html?power=off
-    const FLAGS = {
-      powerCycle: true,   // CRT turn-on/turn-off cycle
-    };
-
-    const power = new URLSearchParams(location.search).get('power');
-    if (power !== null) {
-      FLAGS.powerCycle = !['off', '0', 'false'].includes(power.toLowerCase());
-    }
-
-    if (!FLAGS.powerCycle) {
-      document.documentElement.classList.add('no-power-cycle');
-      document.getElementById('warp-power-kick')?.remove();
-    }
-  </script>
 
 </body>
 </html>
